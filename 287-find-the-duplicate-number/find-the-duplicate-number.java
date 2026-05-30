@@ -1,29 +1,18 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        int left = 1;
-        int right = nums.length - 1;
+        int a = nums[0];
+        int b = nums[0];
 
-        while(left < right) 
-        {
-            int mid = left + (right - left) / 2;
-            int count = 0;
-            
-            for(int num : nums)
-            {
-                if (num <= mid) 
-                {
-                    count++;
-                }
-            }
-            if (count > mid) 
-            {
-                right = mid;
-            }
-            else
-            {
-                left = mid + 1;
-            }
+        do {
+            a = nums[a];
+            b = nums[nums[b]];
+        }while(a != b);
+
+        a = nums[0];
+        while(a != b) {
+            a = nums[a];
+            b = nums[b];
         }
-        return left;
+        return b;
     }
 }
