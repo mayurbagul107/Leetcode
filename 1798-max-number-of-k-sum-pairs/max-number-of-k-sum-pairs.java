@@ -1,26 +1,19 @@
 class Solution {
     public int maxOperations(int[] nums, int k) {
-        Arrays.sort(nums);
-
-        int left = 0;
-        int right = nums.length - 1;
+        Map<Integer, Integer> freq = new HashMap<>();
         int operations = 0;
 
-        while (left < right)
+        for (int num : nums)
         {
-            int sum = nums[left] + nums[right];
-            if (sum == k)
+            int complement = k - num;
+
+            if(freq.getOrDefault(complement, 0) > 0)
             {
                 operations++;
-                left++;
-                right--;
-            }
-            else if(sum < k)
-            {
-                left++;
+                freq.put(complement, freq.get(complement) - 1);
             }
             else{
-                right--;
+                freq.put(num, freq.getOrDefault(num, 0) + 1);
             }
         }
         return operations;
