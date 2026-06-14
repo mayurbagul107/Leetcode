@@ -7,19 +7,17 @@ class Solution {
             for(int j=0; j<n; j++) {
                 row.append(grid[i][j]).append(", ");
             }
-            String key = row.toString();
-            map.put(key, map.getOrDefault(key, 0) + 1);
+            String rowStr = row.toString();
+            map.put(rowStr, map.getOrDefault(rowStr, 0) + 1);
         }
         int count = 0;
-        for(int col=0; col<n; col++) {
+        for(int j=0; j<n; j++) {
             StringBuilder column = new StringBuilder();
-            for(int row=0; row<n; row++) {
-                column.append(grid[row][col]).append(", ");
+            for(int i=0; i<n; i++) {
+                column.append(grid[i][j]).append(", ");
             }
-            String key = column.toString();
-            if(map.containsKey(key)) {
-                count += map.get(key);
-            }
+            String colStr = column.toString();
+            count += map.getOrDefault(colStr, 0);
         }
         return count;
     }
